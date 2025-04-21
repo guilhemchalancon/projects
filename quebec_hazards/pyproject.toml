@@ -1,0 +1,31 @@
+[project]
+name = "hazards-qc"
+version = "0.1.0"
+description = "Streamlit app playing with fire"
+authors = [
+    {name = "Guilhem",email = "guilhem.chalancon@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "geopandas (>=1.0.1,<2.0.0)",
+    "folium (>=0.19.5,<0.20.0)",
+    "branca (>=0.8.1,<0.9.0)",
+    "streamlit (>=1.44.1,<2.0.0)",
+    "cdsapi (>=0.7.5,<0.8.0)",
+    "xarray (>=2025.3.1,<2026.0.0)",
+    "pathlib (>=1.0.1,<2.0.0)",
+    "shapely (>=2.1.0,<3.0.0)",
+    "numpy (>=2.2.5,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "hazards"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pre-commit = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
