@@ -13,7 +13,10 @@ importlib.reload(maps)
 def load_fires() -> gpd.GeoDataFrame:
     loader = fires.FirePointDataLoader()
     loader.load()
-    return loader.data.drop(columns="geometry")
+
+    data = loader.data.copy()
+    data["fire_name"] = data["fire_name"].fillna("")
+    return data.drop(columns="geometry")
 
 
 def main():
@@ -51,10 +54,16 @@ def main():
         f"Showing {len(filtered):,} fires reported since {selected_date.strftime("%A %d %B %Y")}"
     )
 
+    tooltip = {
+        "html": "<b>{fire_id}</b> {fire_name}<br/>Size: {size_ha_fmt} ha<br/>Year: {year}<br/>Long.: {longitude} Lat.: {latitude}",
+        "style": {"backgroundColor": "steelblue", "color": "white"},
+    }
+
     deck = maps.make_pydeck_map(
-        filtered[["longitude", "latitude", "fire_name", "size_ha", "year"]],
+        filtered[["longitude", "latitude", "fire_name", "fire_id", "size_ha", "year"]],
         color_by_year=color_by_year,
         size_by_area=size_by_area,
+        tooltip=tooltip,
     )
     st.pydeck_chart(deck)
 

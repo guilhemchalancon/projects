@@ -89,6 +89,7 @@ def make_pydeck_map(
     min_display_radius=300,
     view_state_ref: str = "Canada",
     alpha: int = 140,
+    tooltip: dict = None,
 ) -> pdk.Deck:
 
     initial_view = default_view_states(setting=view_state_ref)
@@ -116,11 +117,6 @@ def make_pydeck_map(
         )
     else:
         df["radius"] = 2000
-
-    tooltip = {
-        "html": "<b>{fire_name}</b><br/>Size: {size_ha_fmt} ha<br/>Year: {year}<br/>Long.: {longitude} Lat.: {latitude}",
-        "style": {"backgroundColor": "steelblue", "color": "white"},
-    }
 
     deck = pdk.Deck(
         initial_view_state=initial_view,
