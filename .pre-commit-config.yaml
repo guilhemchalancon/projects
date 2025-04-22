@@ -14,12 +14,3 @@ repos:
     - id: black
       language-version: python3.12
       files: \.py$
-
- - repo: https://github.com/pypa/pipx
-   rev: 1.7.1
-   hooks:
-     - id: pipx
-       alias: yapf
-       name: yapf
-       args: ["yapf", "-i"]
-       types: ["python"]
